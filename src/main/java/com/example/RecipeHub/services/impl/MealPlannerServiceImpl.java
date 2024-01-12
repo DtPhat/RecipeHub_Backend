@@ -42,7 +42,8 @@ public class MealPlannerServiceImpl implements MealPlannerService {
 
 	@Override
 	public ArrayList<MealPlannerResponse> getMealPlannerByDate(Long dateLong, Long userId) {
-		String dateDate = DateTimeUtil.milisecondToDateString(dateLong);
+		long shiftedDay = 86400000;
+		String dateDate = DateTimeUtil.milisecondToDateString(dateLong + shiftedDay);
 		List<Meal_planner> meal_Planners = mealPlannerRepository.findByDate(dateDate, userId);
 		ArrayList<MealPlannerResponse> result = new ArrayList<>();
 		for (Meal_planner meal_Planner : meal_Planners) {
